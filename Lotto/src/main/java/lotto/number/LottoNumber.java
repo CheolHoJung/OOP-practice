@@ -42,7 +42,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     
     @Override
     public int hashCode() {
-        return Integer.valueOf(number).hashCode();
+        return number;
     }
    
 }
