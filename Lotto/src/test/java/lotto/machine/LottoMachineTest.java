@@ -6,6 +6,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import lotto.number.LottoNumber;
+import lotto.rank.LottoRank;
 import lotto.ticket.LottoTicket;
 
 public class LottoMachineTest {
@@ -18,7 +19,7 @@ public class LottoMachineTest {
         LottoMachine machine = new LottoMachine();
         machine.setWinNumberTicket(winNumberTicket);
         machine.setBonusNumber(bonusNumber);
-        int result = machine.raffle(userInputLottoTicket);
+        LottoRank result = machine.raffle(userInputLottoTicket);
         assertEquals(1, result);
     }
     
@@ -30,7 +31,7 @@ public class LottoMachineTest {
         LottoMachine machine = new LottoMachine();
         machine.setWinNumberTicket(winNumberTicket);
         machine.setBonusNumber(bonusNumber);
-        int result = machine.raffle(userInputLottoTicket);
+        LottoRank result = machine.raffle(userInputLottoTicket);
         assertEquals(2, result);
     }
     
@@ -42,7 +43,7 @@ public class LottoMachineTest {
         LottoMachine machine = new LottoMachine();
         machine.setWinNumberTicket(winNumberTicket);
         machine.setBonusNumber(bonusNumber);
-        int result = machine.raffle(userInputLottoTicket);
+        LottoRank result = machine.raffle(userInputLottoTicket);
         assertEquals(3, result);
     }
     
@@ -54,7 +55,7 @@ public class LottoMachineTest {
         LottoMachine machine = new LottoMachine();
         machine.setWinNumberTicket(winNumberTicket);
         machine.setBonusNumber(bonusNumber);
-        int result = machine.raffle(userInputLottoTicket);
+        LottoRank result = machine.raffle(userInputLottoTicket);
         assertEquals(4, result);
     }
     
@@ -66,7 +67,7 @@ public class LottoMachineTest {
         LottoMachine machine = new LottoMachine();
         machine.setWinNumberTicket(winNumberTicket);
         machine.setBonusNumber(bonusNumber);
-        int result = machine.raffle(userInputLottoTicket);
+        LottoRank result = machine.raffle(userInputLottoTicket);
         assertEquals(5, result);
     }
 }
