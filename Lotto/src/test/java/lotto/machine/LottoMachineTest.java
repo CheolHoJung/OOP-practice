@@ -20,7 +20,7 @@ public class LottoMachineTest {
         machine.setWinNumberTicket(winNumberTicket);
         machine.setBonusNumber(bonusNumber);
         LottoRank result = machine.raffle(userInputLottoTicket);
-        assertEquals(1, result);
+        assertEquals(LottoRank.FIRST, result);
     }
     
     @Test
@@ -32,7 +32,7 @@ public class LottoMachineTest {
         machine.setWinNumberTicket(winNumberTicket);
         machine.setBonusNumber(bonusNumber);
         LottoRank result = machine.raffle(userInputLottoTicket);
-        assertEquals(2, result);
+        assertEquals(LottoRank.SECOND, result);
     }
     
     @Test
@@ -44,7 +44,7 @@ public class LottoMachineTest {
         machine.setWinNumberTicket(winNumberTicket);
         machine.setBonusNumber(bonusNumber);
         LottoRank result = machine.raffle(userInputLottoTicket);
-        assertEquals(3, result);
+        assertEquals(LottoRank.THIRD, result);
     }
     
     @Test
@@ -56,7 +56,7 @@ public class LottoMachineTest {
         machine.setWinNumberTicket(winNumberTicket);
         machine.setBonusNumber(bonusNumber);
         LottoRank result = machine.raffle(userInputLottoTicket);
-        assertEquals(4, result);
+        assertEquals(LottoRank.FOURTH, result);
     }
     
     @Test
@@ -68,6 +68,6 @@ public class LottoMachineTest {
         machine.setWinNumberTicket(winNumberTicket);
         machine.setBonusNumber(bonusNumber);
         LottoRank result = machine.raffle(userInputLottoTicket);
-        assertEquals(5, result);
+        assertEquals(LottoRank.FIFTH, result);
     }
 }
