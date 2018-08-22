@@ -3,6 +3,7 @@ package lotto.machine;
 import java.util.Iterator;
 
 import lotto.number.LottoNumber;
+import lotto.rank.LottoRank;
 import lotto.ticket.LottoTicket;
 
 public class LottoMachine {
@@ -11,7 +12,7 @@ public class LottoMachine {
     
     LottoNumber bonusNumber;
     
-    public int raffle(LottoTicket targetLottoTicket) {
+    public LottoRank raffle(LottoTicket targetLottoTicket) {
         Iterator<LottoNumber> winNumbersIterator = winNumberTicket.iterator();
         
         int count = 0;
@@ -27,20 +28,7 @@ public class LottoMachine {
             }
         }
         
-        if (count == 6) {
-            return 1;
-        } else if (count == 5) {
-            if (targetLottoTicket.contains(bonusNumber)) {
-                return 2;
-            }
-            return 3;
-        } else if (count == 4) {
-            return 4;
-        } else if (count == 3) {
-            return 5;
-        }
-        
-        return 0;
+        return LottoRank.valueOf(count, targetLottoTicket.contains(bonusNumber));
     }
 
     public void setWinNumberTicket(LottoTicket winNumberTicket) {
