@@ -7,7 +7,9 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import lotto.machine.LottoMachine;
+import lotto.machine.LottoMachine.LottoStatistics;
 import lotto.number.LottoNumber;
+import lotto.rank.LottoRank;
 import lotto.ticket.LottoTicket;
 
 public class LottoConsole {
@@ -21,20 +23,28 @@ public class LottoConsole {
         final LottoTicket[] lottos = new LottoTicket[count];
         
         for (int i = 0; i < count; i++) {
-            lottos[i] = asker.askLottoNumbers(i + 1); 
+            lottos[i] = asker.askLottoNumbers(i + 1);
         }
         
         LottoMachine machine = new LottoMachine();
         machine.setWinNumberTicket(asker.askWinNumber());
         machine.setBonusNumber(asker.askBonusNumber());
         
-        System.out.println("당첨통계");
-        System.out.println("------");
-        Arrays.stream(lottos)
-            .forEach(s -> {
-               System.out.println(s + ": " + machine.raffle(s) + "등");
-            });
-            
+        for (LottoTicket lotto : lottos) {
+            machine.raffle(lotto);
+        }
+        
+        LottoStatistics statistics = machine.statistics();
+        System.out.println(createStatisticsString(statistics, LottoRank.FIFTH));
+        System.out.println(createStatisticsString(statistics, LottoRank.FOURTH));
+        System.out.println(createStatisticsString(statistics, LottoRank.THIRD));
+        System.out.println(createStatisticsString(statistics, LottoRank.SECOND));
+        System.out.println(createStatisticsString(statistics, LottoRank.FIRST));
+        System.out.println("총 수익률은 " + statistics.rateOfReturn() + "%입니다.");
+    }
+    
+    private static String createStatisticsString(LottoStatistics statistics, LottoRank rank) {
+        return rank + " - " + statistics.size(rank) + "개";
     }
     
     public static class Asker {
