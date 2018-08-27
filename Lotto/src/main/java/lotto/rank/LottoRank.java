@@ -32,7 +32,11 @@ public enum LottoRank {
                 return v.matchNumber == matchNumber; 
             })
             .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException(matchNumber + "를 찾을 수 없습니다."));
+            .orElse(LottoRank.NONE);
+    }
+    
+    public int getMatchNumber() {
+        return this.matchNumber;
     }
     
     public int getPrice() {

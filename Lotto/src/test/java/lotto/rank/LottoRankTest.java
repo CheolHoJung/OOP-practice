@@ -31,8 +31,8 @@ public class LottoRankTest {
         assertEquals(LottoRank.FIFTH, LottoRank.valueOf(3, false));
     }
     
-    @Test(expected = IllegalArgumentException.class)
-    public void test_잘못된인자() throws Exception {
-        LottoRank.valueOf(7, true);
+    @Test
+    public void test_결과없음() throws Exception {
+        assertEquals(LottoRank.NONE, LottoRank.valueOf(7, false));
     }
 }
