@@ -35,10 +35,6 @@ public enum LottoRank {
             .orElse(LottoRank.NONE);
     }
     
-    public int getMatchNumber() {
-        return this.matchNumber;
-    }
-    
     public int getPrice() {
         return this.price;
     }
