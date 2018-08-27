@@ -7,7 +7,8 @@ public enum LottoRank {
     SECOND(5, 30000000, "2등"),
     THIRD(5, 1500000, "3등"),
     FOURTH(4, 50000, "4등"),
-    FIFTH(3, 5000, "5등");
+    FIFTH(3, 5000, "5등"),
+    NONE(0, 0, "미당첨");
 
     private int matchNumber;
     
@@ -32,6 +33,10 @@ public enum LottoRank {
             })
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException(matchNumber + "를 찾을 수 없습니다."));
+    }
+    
+    public int getPrice() {
+        return this.price;
     }
     
     @Override
