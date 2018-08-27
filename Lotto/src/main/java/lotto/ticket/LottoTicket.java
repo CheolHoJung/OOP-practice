@@ -27,7 +27,8 @@ public class LottoTicket {
     }
 
     public static LottoTicket generateByUserInput(String input) {
-        Set<LottoNumber> lottoNumbers = Arrays.stream(input.split(","))
+        
+        Set<LottoNumber> lottoNumbers = Arrays.stream(input.replaceAll("[\\s\\[\\]]", "").split(","))
                 .map(s -> LottoNumber.valueOf(s))
                 .collect(Collectors.toSet());
         return new LottoTicket(lottoNumbers);
