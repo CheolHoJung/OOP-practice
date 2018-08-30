@@ -24,10 +24,10 @@ public class VendingMachineTest {
         machine.putCoin(500);
         machine.selectDrink(new Drink("Cola", 650));
         
-        CoinSet expectedCointset = new CoinSet();
-        expectedCointset.add(50);
+        CoinSet expectedCoinSet = new CoinSet();
+        expectedCoinSet.add(50);
         
-        assertEquals("700원 투입 후 650원 음료 선택", expectedCointset, machine.getChangeCoinSet());
+        assertEquals("700원 투입 후 650원 음료 선택", expectedCoinSet, machine.getChangeCoinSet());
     }
     
     @Test // 거스름돈 180원
