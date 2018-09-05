@@ -19,24 +19,29 @@ public class VendingMachine {
     public CoinSet getChangeCoinSet() {
         CoinSet coinSet = new CoinSet();
         
-        while (changeAmount >= 500) {
-            changeAmount -= 500;
-            coinSet.add(500);
+        Coin KRW500 = Coin.KRW500;
+        Coin KRW100 = Coin.KRW100;
+        Coin KRW50 = Coin.KRW50;
+        Coin KRW10 = Coin.KRW10;
+        
+        while (KRW500.isLessThanOrEqualTo(changeAmount)) {
+            changeAmount = KRW500.changeAmount(changeAmount);
+            coinSet.add(KRW500);
         }
         
-        while (changeAmount >= 100) {
-            changeAmount -= 100;
-            coinSet.add(100);
+        while (KRW100.isLessThanOrEqualTo(changeAmount)) {
+            changeAmount = KRW100.changeAmount(changeAmount);
+            coinSet.add(KRW100);
         }
         
-        while(changeAmount >= 50) {
-            changeAmount -= 50;
-            coinSet.add(50);
+        while(KRW50.isLessThanOrEqualTo(changeAmount)) {
+            changeAmount = KRW50.changeAmount(changeAmount);
+            coinSet.add(KRW50);
         }
         
-        while (changeAmount >= 10) {
-            changeAmount -= 10;
-            coinSet.add(10);
+        while (KRW10.isLessThanOrEqualTo(changeAmount)) {
+            changeAmount = KRW10.changeAmount(changeAmount);
+            coinSet.add(KRW10);
         }
         
         return coinSet;
