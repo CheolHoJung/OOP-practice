@@ -2,14 +2,12 @@ package ui;
 
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import lotto.machine.LottoMachine;
 import lotto.machine.LottoMachine.LottoStatistics;
 import lotto.number.LottoNumber;
-import lotto.rank.LottoRank;
 import lotto.ticket.LottoTicket;
 
 public class LottoConsole {
@@ -35,16 +33,7 @@ public class LottoConsole {
         }
         
         LottoStatistics statistics = machine.statistics();
-        System.out.println(createStatisticsString(statistics, LottoRank.FIFTH));
-        System.out.println(createStatisticsString(statistics, LottoRank.FOURTH));
-        System.out.println(createStatisticsString(statistics, LottoRank.THIRD));
-        System.out.println(createStatisticsString(statistics, LottoRank.SECOND));
-        System.out.println(createStatisticsString(statistics, LottoRank.FIRST));
-        System.out.println("총 수익률은 " + statistics.rateOfReturn() + "%입니다.");
-    }
-    
-    private static String createStatisticsString(LottoStatistics statistics, LottoRank rank) {
-        return rank + " - " + statistics.size(rank) + "개";
+        System.out.println(statistics);
     }
     
     public static class Asker {
@@ -87,6 +76,7 @@ public class LottoConsole {
             if (in.getClass() == System.in.getClass()) {
                 System.out.println(count + "번째 로또번호를 입력해주세요.");
             }
+            
             String input = sc.nextLine();
             try {
                 return LottoTicket.generateByUserInput(input);
@@ -103,6 +93,7 @@ public class LottoConsole {
             if (in.getClass() == System.in.getClass()) {
                 System.out.println("지난주 당첨번호를 입력해 주세요");
             }
+            
             String input = sc.nextLine();
             try {
                 return LottoTicket.generateByUserInput(input);
