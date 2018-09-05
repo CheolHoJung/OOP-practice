@@ -1,7 +1,9 @@
 package ui;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -54,9 +56,7 @@ public class LottoConsole {
         }
         
         public int askMoney() {
-            if (in.getClass() == System.in.getClass()) {
-                System.out.println("구매금액을 입력해 주세요");
-            }
+            printlnWhenIsKeyBoard("구매금액을 입력해 주세요");
             
             if (!sc.hasNextInt()) {
                 throw new InputMismatchException("구매금액은 숫자를 입력해야합니다.");
@@ -72,10 +72,24 @@ public class LottoConsole {
             return input;
         }
         
-        public LottoTicket askLottoNumbers(int count) {
-            if (in.getClass() == System.in.getClass()) {
-                System.out.println(count + "번째 로또번호를 입력해주세요.");
+        private void printlnWhenIsKeyBoard(String msg) {
+            if (isKeyboard()) {
+                try {
+                    out.write(msg.getBytes("UTF-8"));
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
+        }
+
+        private boolean isKeyboard() {
+            return in.getClass() == System.in.getClass();
+        }
+        
+        public LottoTicket askLottoNumbers(int count) {
+            printlnWhenIsKeyBoard(count + "번째 로또번호를 입력해주세요.");
             
             String input = sc.nextLine();
             try {
@@ -90,10 +104,7 @@ public class LottoConsole {
         }
 
         public LottoTicket askWinNumber() {
-            if (in.getClass() == System.in.getClass()) {
-                System.out.println("지난주 당첨번호를 입력해 주세요");
-            }
-            
+            printlnWhenIsKeyBoard("지난주 당첨번호를 입력해 주세요");
             String input = sc.nextLine();
             try {
                 return LottoTicket.generateByUserInput(input);
@@ -103,9 +114,7 @@ public class LottoConsole {
         }
 
         public LottoNumber askBonusNumber() {
-            if (in.getClass() == System.in.getClass()) {
-                System.out.println("지난주 보너스번호를 입력해 주세요");
-            }
+            printlnWhenIsKeyBoard("지난주 보너스번호를 입력해 주세요");
             
             if (!sc.hasNextInt()) {
                 throw new InputMismatchException("보너스번호는 숫자를 입력해야합니다.");
