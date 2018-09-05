@@ -25,7 +25,7 @@ public class VendingMachineTest {
         machine.selectDrink(new Drink("Cola", 650));
         
         CoinSet expectedCoinSet = new CoinSet();
-        expectedCoinSet.add(50);
+        expectedCoinSet.add(Coin.KRW50);
         
         assertEquals("700원 투입 후 650원 음료 선택", expectedCoinSet, machine.getChangeCoinSet());
     }
@@ -39,11 +39,11 @@ public class VendingMachineTest {
         machine.selectDrink(new Drink("Soda", 520));
         
         CoinSet expectedCoinSet = new CoinSet();
-        expectedCoinSet.add(100);
-        expectedCoinSet.add(50);
-        expectedCoinSet.add(10);
-        expectedCoinSet.add(10);
-        expectedCoinSet.add(10);
+        expectedCoinSet.add(Coin.KRW100);
+        expectedCoinSet.add(Coin.KRW50);
+        expectedCoinSet.add(Coin.KRW10);
+        expectedCoinSet.add(Coin.KRW10);
+        expectedCoinSet.add(Coin.KRW10);
         
         assertEquals("700원 투입 후 520원 음료 선택", expectedCoinSet, machine.getChangeCoinSet());
     }
