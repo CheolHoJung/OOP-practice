@@ -17,7 +17,7 @@ public class VendingMachineTestWithoutBusiness {
     public void testReturnChangeCoinSst_oneCoin_50() throws Exception {
         ChangeModule module = new ChangeModule();
         CoinSet expectedCoinSet = new CoinSet();
-        expectedCoinSet.add(50);
+        expectedCoinSet.add(Coin.KRW50);
         
         assertEquals("700원 투입 후 650원 음료 선택", expectedCoinSet, module.getChangeCoinSet(50));
     }
@@ -27,11 +27,11 @@ public class VendingMachineTestWithoutBusiness {
         ChangeModule module = new ChangeModule();
         
         CoinSet expectedCoinSet = new CoinSet();
-        expectedCoinSet.add(100);
-        expectedCoinSet.add(50);
-        expectedCoinSet.add(10);
-        expectedCoinSet.add(10);
-        expectedCoinSet.add(10);
+        expectedCoinSet.add(Coin.KRW100);
+        expectedCoinSet.add(Coin.KRW50);
+        expectedCoinSet.add(Coin.KRW10);
+        expectedCoinSet.add(Coin.KRW10);
+        expectedCoinSet.add(Coin.KRW10);
         
         assertEquals("700원 투입 후 520원 음료 선택", expectedCoinSet, module.getChangeCoinSet(180));
     }
