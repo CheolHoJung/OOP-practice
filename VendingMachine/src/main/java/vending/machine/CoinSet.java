@@ -5,9 +5,9 @@ import java.util.List;
 
 public class CoinSet {
 
-    List<Integer> coinSets = new ArrayList<>();
+    List<Coin> coinSets = new ArrayList<>();
     
-    public void add(int coin) {
+    public void add(Coin coin) {
         this.coinSets.add(coin);
     }
     
@@ -28,7 +28,7 @@ public class CoinSet {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (Integer coin : this.coinSets) {
+        for (Coin coin : this.coinSets) {
             builder.append(coin);
         }
         return builder.toString();
