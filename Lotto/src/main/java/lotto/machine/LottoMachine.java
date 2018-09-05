@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.apache.commons.math3.geometry.partitioning.Side;
+
 import lotto.number.LottoNumber;
 import lotto.rank.LottoRank;
 import lotto.ticket.LottoTicket;
@@ -70,7 +72,7 @@ public class LottoMachine {
             board.put(LottoRank.NONE, new ArrayList<>());
         }
         
-        public int size(LottoRank rank) {
+        int size(LottoRank rank) {
             return board.get(rank).size();
         }
         
@@ -78,7 +80,7 @@ public class LottoMachine {
             board.get(rank).add(ticket);
         }
 
-        public int rateOfReturn() {
+        int rateOfReturn() {
             int inputMoney = (int) (board.values()
                     .stream()
                     .filter(l -> l.size() != 0)
@@ -92,6 +94,18 @@ public class LottoMachine {
                         (i1, i2) -> i1 + i2);
             
             return winMoney / inputMoney * 100;
+        }
+        
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(LottoRank.FIFTH + " - " + size(LottoRank.FIFTH) + "개\n");
+            sb.append(LottoRank.FOURTH + " - " + size(LottoRank.FOURTH) + "개\n");
+            sb.append(LottoRank.THIRD + " - " + size(LottoRank.THIRD) + "개\n");
+            sb.append(LottoRank.SECOND + " - " + size(LottoRank.SECOND) + "개\n");
+            sb.append(LottoRank.FIRST + " - " + size(LottoRank.FIRST) + "개\n");
+            sb.append("총 수익률은 " + rateOfReturn() + "%입니다.");
+            return sb.toString();
         }
     }
 }
