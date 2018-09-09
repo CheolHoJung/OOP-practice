@@ -75,7 +75,7 @@ public class LottoConsole {
         private void printlnWhenIsKeyBoard(String msg) {
             if (isKeyboard()) {
                 try {
-                    out.write(msg.getBytes("UTF-8"));
+                    out.write((msg + "\n").getBytes("UTF-8"));
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
