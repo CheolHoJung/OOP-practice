@@ -5,9 +5,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-
-import org.apache.commons.math3.geometry.partitioning.Side;
 
 import lotto.number.LottoNumber;
 import lotto.rank.LottoRank;
@@ -98,13 +95,13 @@ public class LottoMachine {
         
         @Override
         public String toString() {
-            StringBuilder sb = new StringBuilder();
-            sb.append(LottoRank.FIFTH + " - " + size(LottoRank.FIFTH) + "개\n");
-            sb.append(LottoRank.FOURTH + " - " + size(LottoRank.FOURTH) + "개\n");
-            sb.append(LottoRank.THIRD + " - " + size(LottoRank.THIRD) + "개\n");
-            sb.append(LottoRank.SECOND + " - " + size(LottoRank.SECOND) + "개\n");
-            sb.append(LottoRank.FIRST + " - " + size(LottoRank.FIRST) + "개\n");
-            sb.append("총 수익률은 " + rateOfReturn() + "%입니다.");
+            StringBuilder sb = new StringBuilder("\n당첨통계\n--------\n");
+            sb.append(LottoRank.FIFTH + " - " + size(LottoRank.FIFTH) + "개\n")
+              .append(LottoRank.FOURTH + " - " + size(LottoRank.FOURTH) + "개\n")
+              .append(LottoRank.THIRD + " - " + size(LottoRank.THIRD) + "개\n")
+              .append(LottoRank.SECOND + " - " + size(LottoRank.SECOND) + "개\n")
+              .append(LottoRank.FIRST + " - " + size(LottoRank.FIRST) + "개\n")
+              .append("총 수익률은 " + rateOfReturn() + "%입니다.");
             return sb.toString();
         }
     }
