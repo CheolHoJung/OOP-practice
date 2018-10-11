@@ -34,21 +34,21 @@ public class LottoConsoleTest {
     public void test_로또번호입력_실패_크기() throws Exception {
         InputStream in = new ByteArrayInputStream("1,2,3,4,5".getBytes());
         Asker asker = new Asker(in, System.out);
-        asker.askLottoNumbers();
+        asker.askLottoTicketNumber();
     }
     
     @Test(expected = IllegalStateException.class)
     public void test_로또번호입력_실패_범위() throws Exception {
         InputStream in = new ByteArrayInputStream("1,2,3,4,5,46".getBytes());
         Asker asker = new Asker(in, System.out);
-        asker.askLottoNumbers();
+        asker.askLottoTicketNumber();
     }
     
     @Test(expected = IllegalStateException.class)
     public void test_로또번호입력_실패_컴마구분_아님() throws Exception {
         InputStream in = new ByteArrayInputStream("1 2 3 4 5 6".getBytes());
         Asker asker = new Asker(in, System.out);
-        asker.askLottoNumbers();
+        asker.askLottoTicketNumber();
     }
     
     @Test(expected = IllegalStateException.class)
@@ -98,7 +98,7 @@ public class LottoConsoleTest {
         for (int i = 0; i < count; i++) {
             InputStream lottoNumberIn = new ByteArrayInputStream("1,2,3,4,5,6".getBytes());
             Asker lottoNumberAsker = new Asker(lottoNumberIn, System.out);
-            lottos[i] = lottoNumberAsker.askLottoNumbers(i + 1);
+            lottos[i] = lottoNumberAsker.askLottoTicketNumber(i + 1);
         }
         
         for (int i = 0; i < lottos.length; i++) {
