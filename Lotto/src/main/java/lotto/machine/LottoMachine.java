@@ -78,11 +78,7 @@ public class LottoMachine {
         }
 
         int rateOfReturn() {
-            int inputMoney = (int) (board.values()
-                    .stream()
-                    .filter(l -> l.size() != 0)
-                    .flatMap(l -> l.stream())
-                    .count()) * LottoTicket.MONEY_PER_TICKET;
+            int inputMoney = getTicketCount() * LottoTicket.MONEY_PER_TICKET;
             
             int winMoney = board.keySet()
                     .stream()
@@ -91,6 +87,14 @@ public class LottoMachine {
                         (result1, result2) -> result1 + result2);
             
             return winMoney / inputMoney * 100;
+        }
+        
+        private int getTicketCount() {
+            return (int) board.values()
+                    .stream()
+                    .filter(ticketOfRank -> ticketOfRank.size() != 0)
+                    .flatMap(ticketOfRank -> ticketOfRank.stream())
+                    .count();
         }
         
         private int calculateWinMoneyInBoard(LottoRank rank) {
