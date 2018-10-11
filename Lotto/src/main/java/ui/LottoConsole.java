@@ -61,7 +61,7 @@ public class LottoConsole {
             }
             
             int money = nextInt();
-            if (money % LottoTicket.MONEY_PER_TICKET != 0) {
+            if (LottoTicket.hasSmallChange(money)) {
                 throw new IllegalStateException("구매금액은 " + LottoTicket.MONEY_PER_TICKET + "원 단위입니다");
             }
             
