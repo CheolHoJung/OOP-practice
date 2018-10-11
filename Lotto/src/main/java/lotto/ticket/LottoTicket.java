@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import lotto.number.LottoNumber;
 
-public class LottoTicket {
+public class LottoTicket implements Iterable<LottoNumber> {
 
     public static final int MONEY_PER_TICKET = 1000;
     
