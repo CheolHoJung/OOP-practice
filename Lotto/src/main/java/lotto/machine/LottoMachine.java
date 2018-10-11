@@ -87,10 +87,14 @@ public class LottoMachine {
             int winMoney = board.keySet()
                     .stream()
                     .reduce(0,
-                        (acc, cur) -> acc + (cur.getPrice() * board.get(cur).size()),
-                        (i1, i2) -> i1 + i2);
+                        (money, rank) -> money + calculateWinMoneyInBoard(rank),
+                        (result1, result2) -> result1 + result2);
             
             return winMoney / inputMoney * 100;
+        }
+        
+        private int calculateWinMoneyInBoard(LottoRank rank) {
+            return rank.getPrice() * board.get(rank).size();
         }
         
         @Override
