@@ -41,4 +41,8 @@ public class LottoTicket {
     public boolean contains(LottoNumber number) {
         return lottoNumbers.contains(number);
     }
+    
+    public static boolean hasSmallChange(int money) {
+        return money % LottoTicket.MONEY_PER_TICKET != 0;
+    }
 }
