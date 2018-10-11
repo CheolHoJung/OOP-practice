@@ -23,7 +23,7 @@ public class LottoConsole {
         final LottoTicket[] lottos = new LottoTicket[count];
         
         for (int i = 0; i < count; i++) {
-            lottos[i] = asker.askLottoNumbers(i + 1);
+            lottos[i] = asker.askLottoTicketNumber(i + 1);
         }
         
         LottoMachine machine = new LottoMachine();
@@ -56,73 +56,82 @@ public class LottoConsole {
         }
         
         public int askMoney() {
-            printlnWhenIsKeyBoard("구매금액을 입력해 주세요");
+            if (isKeyboard()) {
+                print("구매금액을 입력해 주세요");
+            }
             
+            int money = nextInt();
+            if (money % LottoTicket.MONEY_PER_TICKET != 0) {
+                throw new IllegalStateException("구매금액은 " + LottoTicket.MONEY_PER_TICKET + "원 단위입니다");
+            }
+            
+            return money;
+        }
+        
+        private void print(String str) {
+            try {
+                out.write((str + "\n").getBytes("UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        
+        private int nextInt() {
             if (!sc.hasNextInt()) {
-                throw new InputMismatchException("구매금액은 숫자를 입력해야합니다.");
+                throw new InputMismatchException("숫자를 입력해야합니다.");
             }
             
             int input = sc.nextInt();
             if (sc.hasNextLine()) {
                 sc.nextLine();
             }
-            if (input % LottoTicket.MONEY_PER_TICKET != 0) {
-                throw new IllegalStateException("구매금액은 " + LottoTicket.MONEY_PER_TICKET + "원 단위입니다");
-            }
             return input;
-        }
-        
-        private void printlnWhenIsKeyBoard(String msg) {
-            if (isKeyboard()) {
-                try {
-                    out.write((msg + "\n").getBytes("UTF-8"));
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
 
         private boolean isKeyboard() {
             return in.getClass() == System.in.getClass();
         }
         
-        public LottoTicket askLottoNumbers(int count) {
-            printlnWhenIsKeyBoard(count + "번째 로또번호를 입력해주세요.");
+        public LottoTicket askLottoTicketNumber(int count) {
+            if (isKeyboard()) {
+                print(count + "번째 로또번호를 입력해주세요.");
+            }
             
-            String input = sc.nextLine();
+            String lottoNumber = sc.nextLine();
             try {
-                return LottoTicket.generateByUserInput(input);
+                return LottoTicket.generateByUserInput(lottoNumber);
             } catch (IllegalArgumentException e) {
                 throw new IllegalStateException(e.getMessage());
             }
         }
         
-        public LottoTicket askLottoNumbers() {
-            return askLottoNumbers(0);
+        public LottoTicket askLottoTicketNumber() {
+            return askLottoTicketNumber(0);
         }
 
         public LottoTicket askWinNumber() {
-            printlnWhenIsKeyBoard("지난주 당첨번호를 입력해 주세요");
-            String input = sc.nextLine();
+            if (isKeyboard()) {
+                print("지난주 당첨번호를 입력해 주세요");
+            }
+            
+            String winNumber = sc.nextLine();
             try {
-                return LottoTicket.generateByUserInput(input);
+                return LottoTicket.generateByUserInput(winNumber);
             } catch (IllegalArgumentException e) {
                 throw new IllegalStateException(e.getMessage());
             }
         }
 
         public LottoNumber askBonusNumber() {
-            printlnWhenIsKeyBoard("지난주 보너스번호를 입력해 주세요");
-            
-            if (!sc.hasNextInt()) {
-                throw new InputMismatchException("보너스번호는 숫자를 입력해야합니다.");
+            if (isKeyboard()) {
+                print("지난주 보너스번호를 입력해 주세요");
             }
             
-            int input = sc.nextInt();
+            int bonusNumber = nextInt();
             try {
-                return LottoNumber.valueOf(input);
+                return LottoNumber.valueOf(bonusNumber);
             } catch (IllegalArgumentException e) {
                 throw new IllegalStateException(e.getMessage());
             }
