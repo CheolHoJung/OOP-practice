@@ -35,14 +35,23 @@ public enum LottoRank {
             .orElse(LottoRank.NONE);
     }
     
-    public int getPrice() {
-        return this.price;
+    public int getPrice(int count) {
+        return price * count;
     }
     
     @Override
     public String toString() {
-        return rankString + ": " + matchNumber + "개 일치" +
-                (this == LottoRank.SECOND ? ", 보너스 볼 일치" : "") +
-                " (" + price + "원)";
+        StringBuilder sb = new StringBuilder(rankString);
+        sb.append(": ")
+          .append(matchNumber)
+          .append("개 일치");
+        if (this == SECOND) {
+            sb.append(", 보너스 볼 일치");
+        }
+        sb.append(" (")
+          .append(price)
+          .append("원)");
+        
+        return sb.toString();
     }
 }
