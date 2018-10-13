@@ -45,13 +45,6 @@ public class LottoConsoleTest {
     }
     
     @Test(expected = IllegalStateException.class)
-    public void test_로또번호입력_실패_컴마구분_아님() throws Exception {
-        InputStream in = new ByteArrayInputStream("1 2 3 4 5 6".getBytes());
-        Asker asker = new Asker(in, System.out);
-        asker.askLottoTicketNumber();
-    }
-    
-    @Test(expected = IllegalStateException.class)
     public void test_지난주_당첨번호입력_실패_크기() throws Exception {
         InputStream in = new ByteArrayInputStream("1,2,3,4,5".getBytes());
         Asker asker = new Asker(in, System.out);
@@ -61,13 +54,6 @@ public class LottoConsoleTest {
     @Test(expected = IllegalStateException.class)
     public void test_지난주_당첨번호입력_실패_범위() throws Exception {
         InputStream in = new ByteArrayInputStream("1,2,3,4,5,46".getBytes());
-        Asker asker = new Asker(in, System.out);
-        asker.askWinNumber();
-    }
-    
-    @Test(expected = IllegalStateException.class)
-    public void test_지난주_당첨번호입력_실패_컴마구분_아님() throws Exception {
-        InputStream in = new ByteArrayInputStream("1 2 3 4 5 6".getBytes());
         Asker asker = new Asker(in, System.out);
         asker.askWinNumber();
     }
