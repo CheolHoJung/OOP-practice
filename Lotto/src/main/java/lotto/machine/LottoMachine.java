@@ -2,7 +2,6 @@ package lotto.machine;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -22,24 +21,10 @@ public class LottoMachine {
         statistics = new LottoStatistics();
     }
     
-    public LottoRank raffle(LottoTicket targetLottoTicket) {
-        Iterator<LottoNumber> winNumbersIterator = winNumberTicket.iterator();
-        
-        int count = 0;
-        while (winNumbersIterator.hasNext()) {
-            LottoNumber winNumber = winNumbersIterator.next();
-            Iterator<LottoNumber> tartgetNumberIterator = targetLottoTicket.iterator();
-            while (tartgetNumberIterator.hasNext()) {
-                LottoNumber targetNumber = tartgetNumberIterator.next();
-                if (winNumber.equals(targetNumber)) {
-                    count++;
-                    break;
-                }
-            }
-        }
-        
-        LottoRank result = LottoRank.valueOf(count, targetLottoTicket.contains(bonusNumber));
-        statistics.add(result, targetLottoTicket);
+    public LottoRank raffle(LottoTicket ticket) {
+        int count = winNumberTicket.getRetainLottoNumberCount(ticket);
+        LottoRank result = LottoRank.valueOf(count, ticket.contains(bonusNumber));
+        statistics.add(result, ticket);
         return result;
     }
 
@@ -57,7 +42,7 @@ public class LottoMachine {
     
     public static class LottoStatistics {
 
-        Map<LottoRank, List<LottoTicket>> board;
+        Map<LottoRank, List<LottoTicket>> board = new HashMap<>();
         
         public LottoStatistics() {
             board = new HashMap<>();
@@ -79,11 +64,10 @@ public class LottoMachine {
 
         int rateOfReturn() {
             int inputMoney = getTicketCount() * LottoTicket.MONEY_PER_TICKET;
-            
             int winMoney = board.keySet()
                     .stream()
                     .reduce(0,
-                        (money, rank) -> money + calculateWinMoneyInBoard(rank),
+                        (money, rank) -> money + rank.getPrice(getTicketCount(rank)),
                         (result1, result2) -> result1 + result2);
             
             return winMoney / inputMoney * 100;
@@ -97,8 +81,8 @@ public class LottoMachine {
                     .count();
         }
         
-        private int calculateWinMoneyInBoard(LottoRank rank) {
-            return rank.getPrice() * board.get(rank).size();
+        private int getTicketCount(LottoRank rank) {
+            return board.get(rank).size();
         }
         
         @Override
