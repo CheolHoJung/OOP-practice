@@ -24,12 +24,12 @@ public enum LottoRank {
     
     public static LottoRank valueOf(int matchNumber, boolean bonusBall) {
         return Arrays.stream(LottoRank.values())
-            .filter(v -> {
+            .filter(rank -> {
                 if (matchNumber == 5) {
-                    return bonusBall ? v == LottoRank.SECOND : v == LottoRank.THIRD;
+                    return bonusBall ? rank == LottoRank.SECOND : rank == LottoRank.THIRD;
                 }
                 
-                return v.matchNumber == matchNumber; 
+                return rank.matchNumber == matchNumber; 
             })
             .findFirst()
             .orElse(LottoRank.NONE);
