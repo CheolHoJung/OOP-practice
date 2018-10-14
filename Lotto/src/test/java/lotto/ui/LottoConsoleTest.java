@@ -77,18 +77,18 @@ public class LottoConsoleTest {
         InputStream moneyIn = new ByteArrayInputStream("5000".getBytes());
         Asker moneyAsker = new Asker(moneyIn, System.out);
         final int money = moneyAsker.askMoney();
-        final int count = money / LottoTicket.MONEY_PER_TICKET;
+        final int count = LottoTicket.count(money);
         
         final LottoTicket[] lottos = new LottoTicket[count];
         
-        for (int i = 0; i < count; i++) {
+        for (int numberOfCount = 1; numberOfCount <= count; numberOfCount++) {
             InputStream lottoNumberIn = new ByteArrayInputStream("1,2,3,4,5,6".getBytes());
             Asker lottoNumberAsker = new Asker(lottoNumberIn, System.out);
-            lottos[i] = lottoNumberAsker.askLottoTicketNumber(i + 1);
+            lottos[numberOfCount - 1] = lottoNumberAsker.askLottoTicketNumber(numberOfCount);
         }
         
-        for (int i = 0; i < lottos.length; i++) {
-            logger.info(lottos[i].toString());
+        for (int numberOfCount = 0; numberOfCount < lottos.length; numberOfCount++) {
+            logger.info(lottos[numberOfCount].toString());
         }
     }
 }
