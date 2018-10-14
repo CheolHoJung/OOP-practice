@@ -21,7 +21,7 @@ public class LottoTicket {
     public LottoTicket(Set<LottoNumber> lottoNumbers) {
         this.lottoNumbers = new TreeSet<>(lottoNumbers);
         if (lottoNumbers.size() != MAX_SIZE) {
-            throw new IllegalArgumentException("로또 용지 한장은 6개의 숫자여야 합니다. 현재 숫자: " + this.lottoNumbers);
+            throw new IllegalArgumentException("로또 용지 한장은 " + MAX_SIZE + "개의 숫자여야 합니다. 현재 숫자: " + this.lottoNumbers);
         }
     }
     
@@ -39,12 +39,16 @@ public class LottoTicket {
         return new LottoTicket(generatedLottoNumbers);
     }
     
-    public boolean contains(LottoNumber number) {
-        return lottoNumbers.contains(number);
-    }
-    
     public static boolean hasSmallChange(int money) {
         return money % LottoTicket.MONEY_PER_TICKET != 0;
+    }
+
+    public static int count(int money) {
+        return money / LottoTicket.MONEY_PER_TICKET;
+    }
+    
+    public boolean contains(LottoNumber number) {
+        return lottoNumbers.contains(number);
     }
     
     public int getRetainLottoNumberCount(LottoTicket ticket) {
