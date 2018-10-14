@@ -94,9 +94,9 @@ public class LottoConsole {
             return in.getClass() == System.in.getClass();
         }
         
-        public LottoTicket askLottoTicketNumber(int count) {
+        public LottoTicket askLottoTicketNumber(int numberOfCount) {
             if (isKeyboard()) {
-                print(count + "번째 로또번호를 입력해주세요.");
+                print(numberOfCount + "번째 로또번호를 입력해주세요.");
             }
             
             String lottoNumber = sc.nextLine();
