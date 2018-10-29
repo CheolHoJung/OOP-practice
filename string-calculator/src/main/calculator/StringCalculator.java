@@ -17,6 +17,9 @@ public class StringCalculator implements Calculator {
 
     @Override
     public int sum(String input) {
+        if (input == null || input.isEmpty()) {
+            return 0;
+        }
         int result = 0;
         for (int num : splitor.split(input)) {
             if (num < 0) {
