@@ -10,6 +10,19 @@ import static org.junit.Assert.assertEquals;
 public class CalculatorTest {
 
     @Test
+    public void test_passNullAndEmpty() {
+        Calculator cal = new StringCalculator();
+        assertEquals(0, cal.sum(null));
+        assertEquals(0, cal.sum(""));
+    }
+
+    @Test
+    public void test_passOne() {
+        Calculator cal = new StringCalculator();
+        assertEquals(10, cal.sum("10"));
+    }
+
+    @Test
     public void test_sumUseDefaultSeparator() {
         Calculator cal = new StringCalculator();
         assertEquals(cal.sum("1:2:3:4:5"), 15);
