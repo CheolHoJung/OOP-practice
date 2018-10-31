@@ -1,34 +1,26 @@
 package main.splitor;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class CustomSplitor implements Splitor {
 
-    String regex = "\\/\\/(.*)\n";
+    final String REGEX_FOR_SEPARATOR = "\\/\\/(.)\n(.*)";
 
     @Override
-    public int[] split(String s) {
-        String separator = getSeparator(s);
-        String inputReplaced = replace(s);
+    public int[] split(String input) {
+        Matcher matcher = matching(input);
+        String separator = matcher.group(1);
+        String inputReplaced = matcher.group(2);
         return Arrays.stream(inputReplaced.split(separator))
                 .mapToInt(Integer::parseInt)
                 .toArray();
     }
 
-    private String replace(String s) {
-        return s.replaceAll(regex, "");
-    }
-
-    private String getSeparator(String s) {
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(s);
-        if (!m.find()) {
-            return "";
-        }
-        return "\\" + m.group(1);
+    private Matcher matching(String input) {
+        Matcher matcher = Pattern.compile(REGEX_FOR_SEPARATOR).matcher(input);
+        if (!matcher.find()) throw new RuntimeException();
+        return matcher;
     }
 }
