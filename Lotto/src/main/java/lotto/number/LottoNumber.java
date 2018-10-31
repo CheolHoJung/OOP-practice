@@ -5,13 +5,17 @@ public class LottoNumber implements Comparable<LottoNumber> {
     final int number;
     
     private LottoNumber(int number) {
-        if (number < 1 || number > 45) {
+        if (isBounded(number)) {
             throw new IllegalArgumentException(number + "는 유효하지 않은 로또번호입니다.");
         }
-        
+
         this.number = number;
     }
-    
+
+    private boolean isBounded(int number) {
+        return number < 1 || number > 45;
+    }
+
     public static LottoNumber valueOf(int number) {
         return new LottoNumber(number);
     }
