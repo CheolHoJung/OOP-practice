@@ -32,7 +32,7 @@ public class CalculatorTest {
     @Test
     public void test_sumUseCustomSeparator() {
         Calculator cal = new StringCalculator(new CustomSplitor());
-        assertEquals(cal.sum("//^\n1^2^3^4^5"), 15);
+        assertEquals(cal.sum("//:\n1:2:3:4:5"), 15);
     }
 
     @Test(expected = RuntimeException.class)

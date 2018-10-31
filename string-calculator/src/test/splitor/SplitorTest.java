@@ -17,8 +17,8 @@ public class SplitorTest {
     }
 
     @Test
-    public void test_splitUseCustomRegex() {
+    public void test_splitUseCustomSeparator() {
         Splitor splitor = new CustomSplitor();
-        assertEquals(splitor.split("//^\n1^2^3^4^5").length, 5);
+        assertEquals(splitor.split("//;\n1;2;3;4;5").length, 5);
     }
 }
