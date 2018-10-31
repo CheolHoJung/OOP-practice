@@ -22,11 +22,17 @@ public class StringCalculator implements Calculator {
         }
         int result = 0;
         for (int num : splitor.split(input)) {
-            if (num < 0) {
-                throw new RuntimeException();
-            }
-            result += num;
+            result += toPositiveInt(num);
         }
         return result;
     }
+
+    private int toPositiveInt(int num) {
+        if (num < 0) {
+            throw new RuntimeException();
+        }
+        return num;
+    }
+
+
 }
