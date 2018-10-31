@@ -17,7 +17,7 @@ public class StringCalculator implements Calculator {
 
     @Override
     public int sum(String input) {
-        if (input == null || input.isEmpty()) {
+        if (isEmpty(input)) {
             return 0;
         }
         int result = 0;
@@ -27,12 +27,14 @@ public class StringCalculator implements Calculator {
         return result;
     }
 
+    private boolean isEmpty(String input) {
+        return input == null || input.isEmpty();
+    }
+
     private int toPositiveInt(int num) {
         if (num < 0) {
             throw new RuntimeException();
         }
         return num;
     }
-
-
 }
