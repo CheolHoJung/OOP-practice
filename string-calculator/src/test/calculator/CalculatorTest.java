@@ -19,4 +19,10 @@ public class CalculatorTest {
         Calculator cal = new Calculator();
         assertEquals(3, cal.add("1,2"));
     }
+
+    @Test
+    public void test_passColonSeparator() {
+        Calculator cal = new Calculator();
+        assertEquals(3, cal.add("1:2"));
+    }
 }

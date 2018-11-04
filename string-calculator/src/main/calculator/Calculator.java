@@ -7,8 +7,8 @@ public class Calculator {
             return 0;
         }
 
-        if (text.contains(",")) {
-            String[] values = text.split(",");
+        if (text.contains(",") || text.contains(":")) {
+            String[] values = text.split("[,:]");
             return sum(parseInts(values));
         }
 
