@@ -6,13 +6,17 @@ public class Calculator {
         if (isEmpty(text)) {
             return 0;
         }
-        String[] nums = text.split(",");
-        int result = 0;
-        for (String num : nums) {
-            result += Integer.parseInt(num);
+
+        if (text.contains(",")) {
+            String[] nums = text.split(",");
+            int result = 0;
+            for (String num : nums) {
+                result += Integer.parseInt(num);
+            }
+            return result;
         }
 
-        return result;
+        return Integer.parseInt(text);
     }
 
     private boolean isEmpty(String text) {
