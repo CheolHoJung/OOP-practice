@@ -3,7 +3,7 @@ package main.calculator;
 public class Calculator {
 
     public int add(String text) {
-        if (text == null || text.isEmpty()) {
+        if (isEmpty(text)) {
             return 0;
         }
         String[] nums = text.split(",");
@@ -13,5 +13,9 @@ public class Calculator {
         }
 
         return result;
+    }
+
+    private boolean isEmpty(String text) {
+        return text == null || text.isEmpty();
     }
 }
