@@ -9,11 +9,7 @@ public class Calculator {
 
         if (text.contains(",")) {
             String[] nums = text.split(",");
-            int result = 0;
-            for (String num : nums) {
-                result += Integer.parseInt(num);
-            }
-            return result;
+            return sum(nums);
         }
 
         return Integer.parseInt(text);
@@ -21,5 +17,13 @@ public class Calculator {
 
     private boolean isEmpty(String text) {
         return text == null || text.isEmpty();
+    }
+
+    private int sum(String[] nums) {
+        int result = 0;
+        for (String num : nums) {
+            result += Integer.parseInt(num);
+        }
+        return result;
     }
 }
