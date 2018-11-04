@@ -8,8 +8,8 @@ public class Calculator {
         }
 
         if (text.contains(",")) {
-            String[] nums = text.split(",");
-            return sum(nums);
+            String[] values = text.split(",");
+            return sum(parseInts(values));
         }
 
         return Integer.parseInt(text);
@@ -19,10 +19,18 @@ public class Calculator {
         return text == null || text.isEmpty();
     }
 
-    private int sum(String[] nums) {
+    private int sum(int[] nums) {
         int result = 0;
-        for (String num : nums) {
-            result += Integer.parseInt(num);
+        for (int num : nums) {
+            result += num;
+        }
+        return result;
+    }
+
+    private int[] parseInts(String[] values) {
+        int[] result = new int[values.length];
+        for (int i = 0; i < values.length; i++) {
+            result[i] = Integer.parseInt(values[i]);
         }
         return result;
     }
