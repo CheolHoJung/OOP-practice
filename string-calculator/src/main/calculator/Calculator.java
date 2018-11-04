@@ -7,12 +7,7 @@ public class Calculator {
             return 0;
         }
 
-        if (text.contains(",") || text.contains(":")) {
-            String[] values = text.split("[,:]");
-            return sum(parseInts(values));
-        }
-
-        return Integer.parseInt(text);
+        return sum(parseInts(split(text)));
     }
 
     private boolean isEmpty(String text) {
@@ -33,5 +28,9 @@ public class Calculator {
             result[i] = Integer.parseInt(values[i]);
         }
         return result;
+    }
+
+    private String[] split(String text) {
+        return text.split("[,:]");
     }
 }
