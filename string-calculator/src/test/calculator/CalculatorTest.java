@@ -13,4 +13,10 @@ public class CalculatorTest {
         assertEquals(0, cal.add(null));
         assertEquals(0, cal.add(""));
     }
+
+    @Test
+    public void test_passCommaSeparator() {
+        Calculator cal = new Calculator();
+        assertEquals(3, cal.add("1,2"));
+    }
 }
