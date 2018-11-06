@@ -1,5 +1,8 @@
 package main.calculator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Calculator {
 
     public int add(String text) {
@@ -31,6 +34,11 @@ public class Calculator {
     }
 
     private String[] split(String text) {
+        Matcher matcher = Pattern.compile("\\/\\/(.)\n(.*)").matcher(text);
+        if (matcher.find()) {
+            return matcher.group(2).split(matcher.group(1));
+        }
+
         return text.split("[,:]");
     }
 }
