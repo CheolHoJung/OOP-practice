@@ -26,4 +26,10 @@ public class CalculatorTest {
         Calculator cal = new Calculator();
         assertEquals(3, cal.add("1:2"));
     }
+
+    @Test
+    public void test_passCustomSeparator() {
+        Calculator cal = new Calculator();
+        assertEquals(3, cal.add("//;\n1;2"));
+    }
 }
