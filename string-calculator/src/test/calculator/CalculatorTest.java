@@ -32,4 +32,10 @@ public class CalculatorTest {
         Calculator cal = new Calculator();
         assertEquals(3, cal.add("//;\n1;2"));
     }
+
+    @Test(expected = RuntimeException.class)
+    public void test_passNegativeNumber() {
+        Calculator cal = new Calculator();
+        cal.add("-1,1,2");
+    }
 }
