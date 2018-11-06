@@ -28,11 +28,15 @@ public class Calculator {
     private int[] parseInts(String[] values) {
         int[] result = new int[values.length];
         for (int i = 0; i < values.length; i++) {
-            int num = Integer.parseInt(values[i]);
-            if (num < 0) {
-                throw new RuntimeException();
-            }
-            result[i] = num;
+            result[i] = toPositiveInt(values[i]);
+        }
+        return result;
+    }
+
+    private int toPositiveInt(String value) {
+        int result = Integer.parseInt(value);
+        if (result < 0) {
+            throw new RuntimeException();
         }
         return result;
     }
