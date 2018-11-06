@@ -28,7 +28,11 @@ public class Calculator {
     private int[] parseInts(String[] values) {
         int[] result = new int[values.length];
         for (int i = 0; i < values.length; i++) {
-            result[i] = Integer.parseInt(values[i]);
+            int num = Integer.parseInt(values[i]);
+            if (num < 0) {
+                throw new RuntimeException();
+            }
+            result[i] = num;
         }
         return result;
     }
