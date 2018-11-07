@@ -17,12 +17,13 @@ public class Calculator {
         return text == null || text.isEmpty();
     }
 
-    private int sum(int[] nums) {
-        int result = 0;
-        for (int num : nums) {
-            result += num;
+    private String[] split(String text) {
+        Matcher matcher = Pattern.compile("\\/\\/(.)\n(.*)").matcher(text);
+        if (matcher.find()) {
+            return matcher.group(2).split(matcher.group(1));
         }
-        return result;
+
+        return text.split("[,:]");
     }
 
     private int[] parseInts(String[] values) {
@@ -41,12 +42,11 @@ public class Calculator {
         return result;
     }
 
-    private String[] split(String text) {
-        Matcher matcher = Pattern.compile("\\/\\/(.)\n(.*)").matcher(text);
-        if (matcher.find()) {
-            return matcher.group(2).split(matcher.group(1));
+    private int sum(int[] nums) {
+        int result = 0;
+        for (int num : nums) {
+            result += num;
         }
-
-        return text.split("[,:]");
+        return result;
     }
 }
