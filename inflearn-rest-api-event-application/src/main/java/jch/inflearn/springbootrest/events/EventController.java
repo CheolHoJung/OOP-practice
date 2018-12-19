@@ -20,17 +20,29 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 @RequestMapping(value = "/api/events", produces = MediaTypes.HAL_JSON_UTF8_VALUE)
 public class EventController {
 
-    @Autowired
-    EventRepository eventRepository;
+    private final EventRepository eventRepository;
 
-    @Autowired
-    ModelMapper modelMapper;
-    
+    private final ModelMapper modelMapper;
+
+    private final EventValidator eventValidator;
+
+    public EventController(EventRepository eventRepository, ModelMapper modelMapper, EventValidator eventValidator) {
+        this.eventRepository = eventRepository;
+        this.modelMapper = modelMapper;
+        this.eventValidator = eventValidator;
+    }
+
     @PostMapping
-    public ResponseEntity createEvent(@RequestBody @Valid EventDto eventDto, Errors error) {
-        if (error.hasErrors()) {
+    public ResponseEntity createEvent(@RequestBody @Valid EventDto eventDto, Errors errors) {
+        if (errors.hasErrors()) {
             return ResponseEntity.badRequest().build();
         }
+
+        eventValidator.validate(eventDto, errors);
+        if (errors.hasErrors()) {
+            return ResponseEntity.badRequest().build();
+        }
+
         Event event = modelMapper.map(eventDto, Event.class);
         Event newEvent = eventRepository.save(event);
         URI createdUrl = linkTo(EventController.class).slash(newEvent.getId()).toUri();
