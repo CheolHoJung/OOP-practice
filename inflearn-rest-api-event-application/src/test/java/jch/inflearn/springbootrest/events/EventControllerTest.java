@@ -363,7 +363,7 @@ public class EventControllerTest {
                 .andExpect(jsonPath("free").value(false))
                 .andExpect(jsonPath("offline").value(true))
                 .andExpect(jsonPath("eventStatus").value(EventStatus.DRAFT.name()))
-                .andDo(document("create-event",
+                .andDo(document("update-event",
                         links(
                                 linkWithRel("self").description("link to self"),
                                 linkWithRel("query-events").description("link to query events"),
@@ -387,7 +387,6 @@ public class EventControllerTest {
                                 fieldWithPath("limitOfEnrollment").description("limit of enrollment")
                         ),
                         responseHeaders(
-                                headerWithName(HttpHeaders.LOCATION).description("Location header"),
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("Content type header")
                         ),
                         responseFields(
