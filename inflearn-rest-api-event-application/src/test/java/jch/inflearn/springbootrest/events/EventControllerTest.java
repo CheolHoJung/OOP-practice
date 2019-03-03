@@ -1,6 +1,7 @@
 package jch.inflearn.springbootrest.events;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jch.inflearn.springbootrest.common.BaseControllerTest;
 import jch.inflearn.springbootrest.common.RestDocsConfiguration;
 import jch.inflearn.springbootrest.common.TestDescription;
 import org.junit.Test;
@@ -38,26 +39,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc
-@AutoConfigureRestDocs
-@Import(RestDocsConfiguration.class)
-@ActiveProfiles("test")
-public class EventControllerTest {
-
-    @Autowired
-    MockMvc mockMvc;
-
-    @Autowired
-    ObjectMapper objectMapper;
+public class EventControllerTest extends BaseControllerTest {
 
     @Autowired
     EventRepository eventRepository;
-
-    @Autowired
-    ModelMapper modelMapper;
-
 
     @Test
     @TestDescription("정상적으로 이벤트를 생성하는 테스트")
