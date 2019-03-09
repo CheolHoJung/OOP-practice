@@ -33,7 +33,7 @@ public class AppConfig {
     @Bean
     public ApplicationRunner applicationRunner() {
         return args -> accountService.save(Account.builder()
-                    .email("jcheolho.dev@gmail")
+                    .email("jcheolho.dev@gmail.com")
                     .password("jch")
                     .roles(Set.of(AccountRole.ADMIN, AccountRole.USER))
                     .build());
