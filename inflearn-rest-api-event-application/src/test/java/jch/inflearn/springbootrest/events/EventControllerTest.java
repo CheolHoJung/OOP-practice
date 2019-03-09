@@ -1,26 +1,14 @@
 package jch.inflearn.springbootrest.events;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jch.inflearn.springbootrest.common.BaseControllerTest;
-import jch.inflearn.springbootrest.common.RestDocsConfiguration;
 import jch.inflearn.springbootrest.common.TestDescription;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.modelmapper.ModelMapper;
+import org.junit.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.boot.test.autoconfigure.restdocs.RestDocsMockMvcConfigurationCustomizer;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Description;
-import org.springframework.context.annotation.Import;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
 import java.util.stream.IntStream;
@@ -30,12 +18,8 @@ import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.li
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.links;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
-import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.restdocs.request.RequestDocumentation.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -238,6 +222,7 @@ public class EventControllerTest extends BaseControllerTest {
                                 fieldWithPath("_embedded.eventList[0].free").description("it tells if this event is free or not"),
                                 fieldWithPath("_embedded.eventList[0].offline").description("it tells if this event is offline event or not"),
                                 fieldWithPath("_embedded.eventList[0].eventStatus").description("event status"),
+                                fieldWithPath("_embedded.eventList[0].manager").description("event manager id"),
                                 fieldWithPath("_embedded.eventList[0]._links.self.href").description("link to self event"),
                                 fieldWithPath("_links.self.href").description("link to self page"),
                                 fieldWithPath("_links.profile.href").description("link to profile"),
@@ -295,6 +280,7 @@ public class EventControllerTest extends BaseControllerTest {
                                 fieldWithPath("free").description("it tells if this event is free or not"),
                                 fieldWithPath("offline").description("it tells if this event is offline event or not"),
                                 fieldWithPath("eventStatus").description("event status"),
+                                fieldWithPath("manager").description("event manager id"),
                                 fieldWithPath("_links.self.href").description("link to self"),
                                 fieldWithPath("_links.profile.href").description("link to profile")
                         )
