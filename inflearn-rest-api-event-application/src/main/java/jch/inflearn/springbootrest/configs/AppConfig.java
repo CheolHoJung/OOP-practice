@@ -1,8 +1,10 @@
 package jch.inflearn.springbootrest.configs;
 
 import jch.inflearn.springbootrest.accounts.Account;
+import jch.inflearn.springbootrest.accounts.AccountRepository;
 import jch.inflearn.springbootrest.accounts.AccountRole;
 import jch.inflearn.springbootrest.accounts.AccountService;
+import jch.inflearn.springbootrest.common.AppProperties;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -32,10 +34,30 @@ public class AppConfig {
 
     @Bean
     public ApplicationRunner applicationRunner() {
-        return args -> accountService.save(Account.builder()
-                    .email("jcheolho.dev@gmail.com")
-                    .password("jch")
-                    .roles(Set.of(AccountRole.ADMIN, AccountRole.USER))
-                    .build());
+        return new ApplicationRunner() {
+
+            @Autowired
+            AccountService accountService;
+
+            @Autowired
+            AppProperties appProperties;
+
+            @Override
+            public void run(ApplicationArguments args) throws Exception {
+                Account admin = Account.builder()
+                        .email(appProperties.getAdminUsername())
+                        .password(appProperties.getAdminPassword())
+                        .roles(Set.of(AccountRole.ADMIN, AccountRole.USER))
+                        .build();
+                accountService.save(admin);
+
+                Account user = Account.builder()
+                        .email(appProperties.getUserUsername())
+                        .password(appProperties.getUserPassword())
+                        .roles(Set.of(AccountRole.USER))
+                        .build();
+                accountService.save(user);
+            }
+        };
     }
 }
