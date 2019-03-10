@@ -4,6 +4,7 @@ import jch.inflearn.springbootrest.accounts.Account;
 import jch.inflearn.springbootrest.accounts.AccountRepository;
 import jch.inflearn.springbootrest.accounts.AccountRole;
 import jch.inflearn.springbootrest.accounts.AccountService;
+import jch.inflearn.springbootrest.common.AppProperties;
 import jch.inflearn.springbootrest.common.BaseControllerTest;
 import jch.inflearn.springbootrest.common.TestDescription;
 import org.junit.*;
@@ -42,6 +43,9 @@ public class EventControllerTest extends BaseControllerTest {
 
     @Autowired
     AccountRepository accountRepository;
+
+    @Autowired
+    AppProperties appProperties;
 
     @Before
     public void setUp() {
@@ -138,22 +142,17 @@ public class EventControllerTest extends BaseControllerTest {
 
     private String getAccessToken() throws Exception {
         // Given
-        String username = "jcho@gmail.com";
-        String password = "jch";
         Account account = Account.builder()
-                .email(username)
-                .password(password)
+                .email(appProperties.getUserUsername())
+                .password(appProperties.getUserPassword())
                 .roles(Set.of(AccountRole.ADMIN, AccountRole.USER))
                 .build();
         this.accountService.save(account);
 
-        String clientId = "myApp";
-        String clientSecret = "pass";
-
         ResultActions perform = this.mockMvc.perform(post("/oauth/token")
-                .with(httpBasic(clientId, clientSecret))
-                .param("username", username)
-                .param("password", password)
+                .with(httpBasic(appProperties.getClientId(), appProperties.getClientSecret()))
+                .param("username", appProperties.getUserUsername())
+                .param("password", appProperties.getUserPassword())
                 .param("grant_type", "password"));
 
         MockHttpServletResponse response = perform.andReturn().getResponse();
