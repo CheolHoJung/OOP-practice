@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+group 'study.jch.auction'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/com.googlecode.windowlicker/windowlicker-core
+    testCompile group: 'com.googlecode.windowlicker', name: 'windowlicker-core', version: 'r268'
+    // https://mvnrepository.com/artifact/com.googlecode.windowlicker/windowlicker-swing
+    testCompile group: 'com.googlecode.windowlicker', name: 'windowlicker-swing', version: 'r268'
+    // https://mvnrepository.com/artifact/jivesoftware/smack
+    compile group: 'jivesoftware', name: 'smack', version: '3.1.0'
+    // https://mvnrepository.com/artifact/com.miglayout/miglayout-swing
+//    compile group: 'com.miglayout', name: 'miglayout-swing', version: '5.2'
+
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    // https://mvnrepository.com/artifact/org.hamcrest/hamcrest-all
+    testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
+}
