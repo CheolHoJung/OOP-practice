@@ -8,6 +8,8 @@ import org.jivesoftware.smack.packet.Message;
 import javax.swing.*;
 
 public class Main {
+    public static final String JOIN_COMMAND_FORMAT = "";
+    public static final String BID_COMMAND_FORMAT = "";
     private Chat notToBeGCd;
 
     private static final int ARG_HOSTNAME = 0;

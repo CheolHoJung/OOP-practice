@@ -7,6 +7,7 @@ public class ApplicationRunner {
     public static final String XPP_HOSTNAME = "localhost";
     public static final String SNIPER_ID = "sniper";
     public static final String SNIPER_PASSWORD = "sniper";
+    public static final String SNIPER_XMPP_ID = "";
 
     private AuctionSniperDriver driver;
 
