@@ -1,13 +1,12 @@
 package study.jch.auction;
 
-import static study.jch.auction.MainWindow.STATUS_JOINING;
-import static study.jch.auction.MainWindow.STATUS_LOST;
+import static study.jch.auction.MainWindow.*;
 
 public class ApplicationRunner {
     public static final String XPP_HOSTNAME = "localhost";
     public static final String SNIPER_ID = "sniper";
     public static final String SNIPER_PASSWORD = "sniper";
-    public static final String SNIPER_XMPP_ID = "";
+    public static final String SNIPER_XMPP_ID = "sniper@localhost/Auction";
 
     private AuctionSniperDriver driver;
 
@@ -27,6 +26,10 @@ public class ApplicationRunner {
         thread.start();
         driver = new AuctionSniperDriver(1000);
         driver.showsSniperStatus(STATUS_JOINING);
+    }
+
+    public void hasShownSniperIsBidding() {
+        driver.showsSniperStatus(STATUS_BIDDING);
     }
 
     public void showsSniperHasLostAuction() {

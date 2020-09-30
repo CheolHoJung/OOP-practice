@@ -6,10 +6,12 @@ import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Main {
-    public static final String JOIN_COMMAND_FORMAT = "";
-    public static final String BID_COMMAND_FORMAT = "";
+    public static final String JOIN_COMMAND_FORMAT = "SQLVersion: 1.1; Command: Join;";
+    public static final String BID_COMMAND_FORMAT = "SQLVersion: 1.1; Command: BID; Price: %d;";
     private Chat notToBeGCd;
 
     private static final int ARG_HOSTNAME = 0;
@@ -38,7 +40,8 @@ public class Main {
                 (Chat aChat, Message message) -> SwingUtilities.invokeLater(() -> ui.showStatus(MainWindow.STATUS_LOST)));
 
         this.notToBeGCd = chat;
-        chat.sendMessage(new Message());
+        chat.sendMessage(JOIN_COMMAND_FORMAT);
+    }
     }
 
     private static XMPPConnection connection(String hostname, String username, String password) throws XMPPException {
