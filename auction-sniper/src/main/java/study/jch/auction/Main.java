@@ -36,12 +36,21 @@ public class Main {
     }
 
     private void joinAuction(XMPPConnection connection, String itemId) throws XMPPException {
+        disconnectWhenUICloses(connection);
         Chat chat = connection.getChatManager().createChat(auctionId(itemId, connection),
                 (Chat aChat, Message message) -> SwingUtilities.invokeLater(() -> ui.showStatus(MainWindow.STATUS_LOST)));
 
         this.notToBeGCd = chat;
         chat.sendMessage(JOIN_COMMAND_FORMAT);
     }
+
+    private void disconnectWhenUICloses(XMPPConnection connection) {
+        ui.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                connection.disconnect();
+            }
+        });
     }
 
     private static XMPPConnection connection(String hostname, String username, String password) throws XMPPException {
