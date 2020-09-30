@@ -3,13 +3,12 @@ package study.jch.auction;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
-import org.jivesoftware.smack.packet.Message;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class Main {
+public class Main implements AuctionEventListener {
     public static final String JOIN_COMMAND_FORMAT = "SQLVersion: 1.1; Command: Join;";
     public static final String BID_COMMAND_FORMAT = "SQLVersion: 1.1; Command: BID; Price: %d;";
     private Chat notToBeGCd;
@@ -38,7 +37,7 @@ public class Main {
     private void joinAuction(XMPPConnection connection, String itemId) throws XMPPException {
         disconnectWhenUICloses(connection);
         Chat chat = connection.getChatManager().createChat(auctionId(itemId, connection),
-                (Chat aChat, Message message) -> SwingUtilities.invokeLater(() -> ui.showStatus(MainWindow.STATUS_LOST)));
+                new AuctionMessageTranslator(this));
 
         this.notToBeGCd = chat;
         chat.sendMessage(JOIN_COMMAND_FORMAT);
@@ -67,5 +66,10 @@ public class Main {
 
     private void starterUserInterface() throws Exception {
         SwingUtilities.invokeAndWait(() -> ui = new MainWindow());
+    }
+
+    @Override
+    public void auctionClosed() {
+        SwingUtilities.invokeLater(() -> ui.showStatus(MainWindow.STATUS_LOST));
     }
 }
