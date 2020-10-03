@@ -21,4 +21,17 @@ public class AuctionSniperTest {
 
         sniper.auctionClosed();
     }
+
+    @Test
+    public void bidsHigherAndReportsBiddingWhenNewPriceArrives() {
+        final int price = 1001;
+        final int increment = 25;
+
+        context.checking(new Expectations() {{
+            oneOf(auction).bid(price + increment);
+            atLeast(1).of(sniperListener).sniperBidding();
+        }});
+
+        sniper.currentPrice(price, increment);
+    }
 }

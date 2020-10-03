@@ -38,7 +38,7 @@ public class Main implements SniperListener {
         disconnectWhenUICloses(connection);
 
         Chat chat = connection.getChatManager().createChat(auctionId(itemId, connection),
-                new AuctionMessageTranslator(new AuctionSniper(this)));
+                new AuctionMessageTranslator(new AuctionSniper( this)));
 
         this.notToBeGCd = chat;
 
@@ -73,5 +73,10 @@ public class Main implements SniperListener {
     @Override
     public void sniperLost() {
         SwingUtilities.invokeLater(() -> ui.showStatus(MainWindow.STATUS_LOST));
+    }
+
+    @Override
+    public void sniperBidding() {
+
     }
 }
