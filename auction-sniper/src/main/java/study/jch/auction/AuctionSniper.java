@@ -5,10 +5,6 @@ public class AuctionSniper implements AuctionEventListener {
     private Auction auction;
     private final SniperListener sniperListener;
 
-    public AuctionSniper(SniperListener sniperListener) {
-        this.sniperListener = sniperListener;
-    }
-
     public AuctionSniper(Auction auction, SniperListener sniperListener) {
         this.auction = auction;
         this.sniperListener = sniperListener;
