@@ -1,5 +1,7 @@
 package study.jch.auction;
 
 public interface Auction {
-    void bid(int i);
+    void bid(int amount);
+
+    void join();
 }
